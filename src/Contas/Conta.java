@@ -48,7 +48,7 @@ public abstract class Conta implements ITaxas{ //implements para Interfaces
     }
 
     public void imprimirExtratoConta(int order) {
-        if (order == 1) operacoes.sort(null);
+        if (order == 1) Collections.sort(operacoes);
         else operacoes.sort((a, b)->a.getData().compareTo(b.getData()));
         System.out.println("\n======= Extrato Conta " + numero + "======");
         for(Operacao atual : operacoes) {
