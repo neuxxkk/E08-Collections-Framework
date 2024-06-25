@@ -1,7 +1,10 @@
+package Main;
 import Cliente.*;
 import Contas.*;
 
+
 public class Main {
+    static boolean timeout = false; //1 segundo para cada operação (tempo real)
     public static void main(String[] args) {
 
         ClientePessoaFisica ana = new ClientePessoaFisica("Ana", "Av. Antonio Carlos, 6627", "023.065.376.66", 25, 'f');
@@ -13,24 +16,15 @@ public class Main {
         Conta conta1 = new ContaUniversitaria(1021, vitor, 565, -500, 3500);
         Conta conta2 = new ContaCorrente(1234, ana, 1000, -300, 1500); //
         conta1.setDono(anaC);
-
         System.out.println(conta2);
 
         conta1.depositar(3000);
         conta1.sacar(500); //
 
         conta2.transferir(conta1, 666); //
-        try{Thread.sleep(1000);}
-        catch (InterruptedException e){Thread.currentThread().interrupt();}
         conta2.depositar(234);
-        try{Thread.sleep(1000);}
-        catch (InterruptedException e){Thread.currentThread().interrupt();}
         conta2.sacar(350); //
-        try{Thread.sleep(1000);}
-        catch (InterruptedException e){Thread.currentThread().interrupt();}
         conta2.sacar(25);
-        try{Thread.sleep(1000);}
-        catch (InterruptedException e){Thread.currentThread().interrupt();}
         conta2.depositar(589);
 
         //System.out.println(conta2);
@@ -50,6 +44,13 @@ public class Main {
         System.out.println("authenticator: " + neuxCIA.autenticar("555669813"));
 
         conta2.imprimirExtratoTaxas();*/
+    }
+
+    public static void delay(long millis){
+        if (timeout){
+            try{Thread.sleep(millis);}
+            catch (InterruptedException e){Thread.currentThread().interrupt();}
+        }
     }
 
 }
