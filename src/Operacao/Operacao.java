@@ -4,6 +4,7 @@ import java.util.*;
 import ITaxas.*;
 import Main.*;
 
+@SuppressWarnings("rawtypes")
 public abstract class Operacao implements ITaxas, Comparable{
 
     private Date data;
@@ -12,10 +13,10 @@ public abstract class Operacao implements ITaxas, Comparable{
     private static int totalOperacoes = 0;
 
     public Operacao(char tipo, double valor) {
-        Main.delay(1000);
         this.tipo = tipo;
         this.valor = valor;
         data = new Date();
+        if (Main.realTime) data.setTime((totalOperacoes * data.getTime()/5) + (new Random().nextLong(data.getTime()))/8);
         Operacao.totalOperacoes++;
     }
 
